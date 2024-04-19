@@ -4,6 +4,9 @@
 맨 처음에 나오는 숫자: scan 된 wifi ap 수  
 SSID    RSSI(dBm)    Channel    Band Width(MHz)  
 
+## 매트랩 코드
+https://drive.google.com/drive/folders/1zXymEdCSx9j-uesLY7W9gB2mRGxoH489?usp=sharing  
+
 ## Example
 I (635) main_task: Returned from app_main()  
 scan> scan  
