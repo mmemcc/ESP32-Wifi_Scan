@@ -5,9 +5,9 @@
 SSID    RSSI(dBm)   Channel    Band Width(MHz)  
 
 ## Example
-I (635) main_task: Returned from app_main()
-scan> scan
-47
+I (635) main_task: Returned from app_main()  
+scan> scan  
+47  
 chung1118,      -38,    5,      40  
 chung1118(2),   -44,    11,     40  
 [LG_CeilingCassette A/C]34f4,   -44,    11,     20  
