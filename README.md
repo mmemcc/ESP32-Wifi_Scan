@@ -2,7 +2,7 @@
 ## 사용법
 부팅 후 시리얼 모니터에 'scan' 입력 시 wifi AP를 스캔함.  
 맨 처음에 나오는 숫자: scan 된 wifi ap 수  
-SSID    RSSI(dBm)   Channel    Band Width(MHz)  
+SSID    RSSI(dBm)    Channel    Band Width(MHz)  
 
 ## Example
 I (635) main_task: Returned from app_main()  
