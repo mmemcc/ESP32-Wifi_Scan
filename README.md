@@ -1,91 +1,37 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- |
 
-# Wi-Fi Scan Example
+## 사용법
+부팅 후 시리얼 모니터에 'scan' 입력 시 wifi AP를 스캔함.
+맨 처음에 나오는 숫자: scan 된 wifi ap 수
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
-
-This example shows how to scan for available set of APs.
-
-## How to use example
-
-Before project configuration and build, be sure to set the correct chip target using `idf.py set-target <chip_name>`.
-
-### Hardware Required
-
-* A development board with ESP32/ESP32-S2/ESP32-C3 SoC (e.g., ESP32-DevKitC, ESP-WROVER-KIT, etc.).
-* A USB cable for Power supply and programming.
-
-### Configure the project
-
-Open the project configuration menu (`idf.py menuconfig`).
-
-In the `Example Configuration` menu:
-
-* Set the Example configuration.
-    * Use `Max size of scan list` to set the maximum nunber of access points in the list.
-
-### Build and Flash
-
-Build the project and flash it to the board, then run the monitor tool to view the serial output:
-
-Run `idf.py -p PORT flash monitor` to build, flash and monitor the project.
-
-(To exit the serial monitor, type ``Ctrl-]``.)
-
-See the Getting Started Guide for all the steps to configure and use the ESP-IDF to build projects.
-
-* [ESP-IDF Getting Started Guide on ESP32](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html)
-* [ESP-IDF Getting Started Guide on ESP32-S2](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
-* [ESP-IDF Getting Started Guide on ESP32-C3](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html)
-
-## Example Output
-
-As you run the example, you will see the following log:
-
-```
-I (443) wifi:wifi firmware version: 6bff005
-I (443) wifi:wifi certification version: v7.0
-I (443) wifi:config NVS flash: enabled
-I (443) wifi:config nano formating: disabled
-I (453) wifi:Init data frame dynamic rx buffer num: 32
-I (453) wifi:Init management frame dynamic rx buffer num: 32
-I (463) wifi:Init management short buffer num: 32
-I (463) wifi:Init dynamic tx buffer num: 32
-I (473) wifi:Init static tx FG buffer num: 2
-I (473) wifi:Init static rx buffer size: 1600
-I (473) wifi:Init static rx buffer num: 10
-I (483) wifi:Init dynamic rx buffer num: 32
-I (483) wifi_init: rx ba win: 6
-I (493) wifi_init: tcpip mbox: 32
-I (493) wifi_init: udp mbox: 6
-I (493) wifi_init: tcp mbox: 6
-I (503) wifi_init: tcp tx win: 5744
-I (503) wifi_init: tcp rx win: 5744
-I (513) wifi_init: tcp mss: 1440
-I (513) wifi_init: WiFi IRAM OP enabled
-I (513) wifi_init: WiFi RX IRAM OP enabled
-I (533) phy_init: phy_version 300,6e46ba7,Jan 25 2021
-I (683) wifi:set rx active PTI: 0, rx ack PTI: 0, and default PTI: 0
-I (683) wifi:mode : sta (7c:df:a1:40:23:84)
-I (683) wifi:enable tsf
-I (2783) scan: Total APs scanned = 17
-I (2783) scan: SSID 		IoTNetwork
-I (2783) scan: RSSI 		-50
-I (2783) scan: Authmode 	WIFI_AUTH_WPA2_PSK
-I (2783) scan: Pairwise Cipher 	WIFI_CIPHER_TYPE_CCMP
-I (2793) scan: Group Cipher 	WIFI_CIPHER_TYPE_CCMP
-I (2793) scan: Channel 		5
-
-I (2883) scan: SSID 		TP-Link_6872
-I (2883) scan: RSSI 		-70
-I (2883) scan: Authmode 	WIFI_AUTH_WPA_WPA2_PSK
-I (2893) scan: Pairwise Cipher 	WIFI_CIPHER_TYPE_CCMP
-I (2893) scan: Group Cipher 	WIFI_CIPHER_TYPE_CCMP
-I (2903) scan: Channel 		11
-...
-```
-
-## Troubleshooting
-
-For any technical queries, please open an [issue](https://github.com/espressif/esp-idf/issues) on GitHub. We will get back to you soon.
+## Example
+I (635) main_task: Returned from app_main()
+scan> scan
+47
+chung1118,      -38,    5,      40
+chung1118(2),   -44,    11,     40
+[LG_CeilingCassette A/C]34f4,   -44,    11,     20
+sejong, -46,    1,      20
+eduroam,        -46,    1,      20
+sejong-help,    -48,    1,      20
+sejong-guest,   -48,    1,      20
+ip8004T1120_2G, -50,    4,      40
+T wifi zone,    -53,    1,      20
+T wifi zone_secure,     -53,    1,      20
+T Free WiFi Zone,       -53,    1,      20
+DS_LAB, -53,    9,      20
+TP-LINK_A414,   -54,    6,      40
+[LG_AirPurifier]1a81,   -55,    11,     20
+MTV310 DAD,     -57,    8,      40
+sungkyu,        -58,    3,      40
+1106A_Lab,      -58,    11,     20
+wf21010,        -59,    4,      40
+DIRECT-C4 C56x Series,  -62,    1,      20
+APTL,   -62,    5,      40
+[air purifier] Samsung, -68,    1,      20
+eduroam,        -68,    11,     20
+iptime_engeo,   -69,    8,      40
+AT_402_AIR_910604_WW_c514,      -69,    11,     20
+Kwon's Lab,     -70,    11,     40
+sejong-help,    -70,    11,     20
+DIRECT-e9-HP M477 LaserJet,     -71,    6,      20
+DIRECT-0b-HP M282 LaserJet,     -71,    11,     20
