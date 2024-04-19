@@ -19,6 +19,7 @@
 
 //TickType_t xLastWakeTime;
 //static const TickType_t xPeriod = 3000 / portTICK_PERIOD_MS;
+#define DEFAULT_SCAN_LIST_SIZE CONFIG_EXAMPLE_SCAN_LIST_SIZE
 
 void initialise_wifi(void)
 {
@@ -35,7 +36,8 @@ void initialise_wifi(void)
 
 static void wifi_scan(void)
 {
-    //xLastWakeTime = xTaskGetTickCount();
+    uint16_t number = DEFAULT_SCAN_LIST_SIZE;
+    wifi_ap_record_t ap_info[DEFAULT_SCAN_LIST_SIZE];
     printf("Error check = 39\n");
     uint16_t ap_count = 0;
     printf("Error check = 41\n");
@@ -47,11 +49,9 @@ static void wifi_scan(void)
     printf("Error check = 47\n");
     ESP_ERROR_CHECK(esp_wifi_scan_get_ap_num(&ap_count));
     printf("Error check = 49\n");
-    wifi_ap_record_t ap_info[ap_count];
-    printf("Error check = 51\n");
-    memset(ap_info, 0, ap_count);
+    memset(ap_info, 0, sizeof(ap_info));
     printf("Error check = 52\n");
-    ESP_ERROR_CHECK(esp_wifi_scan_get_ap_records(10, ap_info));
+    ESP_ERROR_CHECK(esp_wifi_scan_get_ap_records(&number, ap_info));
     
     printf("Total APs scanned = %u\n", ap_count);
     printf("SSID, RSSI, Channel, BW\n");
@@ -90,7 +90,7 @@ void app_main(void)
     //xLastWakeTime = xTaskGetTickCount();
     //int logtimer = 0;
     //vTaskDelayUntil(&xLastWakeTime, xPeriod);
-    /*while(true){
+    /*for(;;)){
         logtimer++;
         wifi_scan();
         if (logtimer >= 300)

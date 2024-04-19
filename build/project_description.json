@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "scan",
-    "project_version":    "2f3b2cb-dirty",
+    "project_version":    "6fa6183-dirty",
     "project_path":       "C:/Users/user/workspace/esp32/scan",
     "idf_path":           "C:/Espressif/frameworks/esp-idf-v5.1.2",
     "build_dir":          "C:/Users/user/workspace/esp32/scan/build",

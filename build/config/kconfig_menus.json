@@ -5569,7 +5569,7 @@
                 "name": "EXAMPLE_SCAN_LIST_SIZE",
                 "range": [
                     0,
-                    20
+                    50
                 ],
                 "title": "Max size of scan list",
                 "type": "int"
