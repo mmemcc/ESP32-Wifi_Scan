@@ -1,3 +1,7 @@
+#
+# Automatically generated file. DO NOT EDIT.
+# Espressif IoT Development Framework (ESP-IDF)  Project Configuration
+#
 CONFIG_SOC_MPU_MIN_REGION_SIZE=0x20000000
 CONFIG_SOC_MPU_REGIONS_MAX_NUM=8
 CONFIG_SOC_ADC_SUPPORTED=y
@@ -466,7 +470,7 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # Example Configuration
 #
-CONFIG_EXAMPLE_SCAN_LIST_SIZE=10
+CONFIG_EXAMPLE_SCAN_LIST_SIZE=40
 # end of Example Configuration
 
 #

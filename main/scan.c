@@ -1,14 +1,3 @@
-/* Scan Example
-
-   This example code is in the Public Domain (or CC0 licensed, at your option.)
-
-   Unless required by applicable law or agreed to in writing, this
-   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-   CONDITIONS OF ANY KIND, either express or implied.
-*/
-
-
-
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/event_groups.h"
@@ -16,9 +5,10 @@
 #include "esp_log.h"
 #include "esp_event.h"
 #include "nvs_flash.h"
+#include "esp_console.h"
 
-TickType_t xLastWakeTime;
-static const TickType_t xPeriod = 1000 / portTICK_PERIOD_MS;
+//TickType_t xLastWakeTime;
+//static const TickType_t xPeriod = 1000 / portTICK_PERIOD_MS;
 
 
 void initialise_wifi(void)
@@ -34,9 +24,10 @@ void initialise_wifi(void)
     ESP_ERROR_CHECK(esp_wifi_start());
 }
 
-static void wifi_scan(void)
-{
 
+
+static int wifi_scan(void)
+{
     uint16_t ap_count = 0;
     uint8_t center_channel;
     uint8_t bw;
@@ -44,11 +35,11 @@ static void wifi_scan(void)
 
     ESP_ERROR_CHECK(esp_wifi_scan_get_ap_num(&ap_count));
 
+    printf("%u\n", ap_count);
+
     wifi_ap_record_t* ap_info = (wifi_ap_record_t*)malloc(ap_count * sizeof(wifi_ap_record_t));
 
     ESP_ERROR_CHECK(esp_wifi_scan_get_ap_records(&ap_count, ap_info));
-    
-    printf("%u\n", ap_count);
 
     for (int i = 0; (i < ap_count); i++) {
         if (ap_info[i].second == WIFI_SECOND_CHAN_ABOVE){
@@ -67,7 +58,19 @@ static void wifi_scan(void)
     }
     free(ap_info);
     esp_wifi_scan_stop();
-    //vTaskDelayUntil(&xLastWakeTime, xPeriod);
+    
+    return 0;
+}
+
+void register_scan(void)
+{
+    const esp_console_cmd_t scan_cmd = {
+        .command = "scan",
+        .help = "Scan for available WiFi networks",
+        .hint = NULL,
+        .func = &wifi_scan,
+    };
+    ESP_ERROR_CHECK(esp_console_cmd_register(&scan_cmd));
 }
 
 void app_main(void)
@@ -82,10 +85,27 @@ void app_main(void)
 
     initialise_wifi();
 
-    xLastWakeTime = xTaskGetTickCount();
+    esp_console_repl_t *repl = NULL;
+    esp_console_repl_config_t repl_config = ESP_CONSOLE_REPL_CONFIG_DEFAULT();
 
-    for(;;){
-        wifi_scan();
-        vTaskDelayUntil(&xLastWakeTime, xPeriod);
-    }
+    repl_config.prompt = "scan>";
+
+#if defined(CONFIG_ESP_CONSOLE_UART_DEFAULT) || defined(CONFIG_ESP_CONSOLE_UART_CUSTOM)
+    esp_console_dev_uart_config_t uart_config = ESP_CONSOLE_DEV_UART_CONFIG_DEFAULT();
+    ESP_ERROR_CHECK(esp_console_new_repl_uart(&uart_config, &repl_config, &repl));
+
+#elif defined(CONFIG_ESP_CONSOLE_USB_CDC)
+    esp_console_dev_usb_cdc_config_t hw_config = ESP_CONSOLE_DEV_CDC_CONFIG_DEFAULT();
+    ESP_ERROR_CHECK(esp_console_new_repl_usb_cdc(&hw_config, &repl_config, &repl));
+
+#elif defined(CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG)
+    esp_console_dev_usb_serial_jtag_config_t hw_config = ESP_CONSOLE_DEV_USB_SERIAL_JTAG_CONFIG_DEFAULT();
+    ESP_ERROR_CHECK(esp_console_new_repl_usb_serial_jtag(&hw_config, &repl_config, &repl));
+#else
+#error Unsupported console type
+#endif
+
+    register_scan();
+
+    ESP_ERROR_CHECK(esp_console_start_repl(repl));
 }
