@@ -17,9 +17,9 @@
 #include "esp_event.h"
 #include "nvs_flash.h"
 
-//TickType_t xLastWakeTime;
-//static const TickType_t xPeriod = 3000 / portTICK_PERIOD_MS;
-#define DEFAULT_SCAN_LIST_SIZE CONFIG_EXAMPLE_SCAN_LIST_SIZE
+TickType_t xLastWakeTime;
+static const TickType_t xPeriod = 1000 / portTICK_PERIOD_MS;
+
 
 void initialise_wifi(void)
 {
@@ -36,25 +36,19 @@ void initialise_wifi(void)
 
 static void wifi_scan(void)
 {
-    uint16_t number = DEFAULT_SCAN_LIST_SIZE;
-    wifi_ap_record_t ap_info[DEFAULT_SCAN_LIST_SIZE];
-    printf("Error check = 39\n");
+
     uint16_t ap_count = 0;
-    printf("Error check = 41\n");
     uint8_t center_channel;
-    printf("Error check = 43\n");
     uint8_t bw;
-    printf("Error check = 45\n");
     esp_wifi_scan_start(NULL, true);
-    printf("Error check = 47\n");
+
     ESP_ERROR_CHECK(esp_wifi_scan_get_ap_num(&ap_count));
-    printf("Error check = 49\n");
-    memset(ap_info, 0, sizeof(ap_info));
-    printf("Error check = 52\n");
-    ESP_ERROR_CHECK(esp_wifi_scan_get_ap_records(&number, ap_info));
+
+    wifi_ap_record_t* ap_info = (wifi_ap_record_t*)malloc(ap_count * sizeof(wifi_ap_record_t));
+
+    ESP_ERROR_CHECK(esp_wifi_scan_get_ap_records(&ap_count, ap_info));
     
-    printf("Total APs scanned = %u\n", ap_count);
-    printf("SSID, RSSI, Channel, BW\n");
+    printf("%u\n", ap_count);
 
     for (int i = 0; (i < ap_count); i++) {
         if (ap_info[i].second == WIFI_SECOND_CHAN_ABOVE){
@@ -71,6 +65,7 @@ static void wifi_scan(void)
         }
         printf("%s,\t%d,\t%d,\t%d\n", ap_info[i].ssid, ap_info[i].rssi, center_channel, bw);        
     }
+    free(ap_info);
     esp_wifi_scan_stop();
     //vTaskDelayUntil(&xLastWakeTime, xPeriod);
 }
@@ -86,22 +81,11 @@ void app_main(void)
     ESP_ERROR_CHECK( ret );
 
     initialise_wifi();
-    wifi_scan();
-    //xLastWakeTime = xTaskGetTickCount();
-    //int logtimer = 0;
-    //vTaskDelayUntil(&xLastWakeTime, xPeriod);
-    /*for(;;)){
-        logtimer++;
+
+    xLastWakeTime = xTaskGetTickCount();
+
+    for(;;){
         wifi_scan();
-        if (logtimer >= 300)
-        {
-            printf("FTM STOP\n");
-            break;
-        }
-        else
-        {
-            vTaskDelayUntil(&xLastWakeTime, xPeriod);
-            continue;
-        }
-    }*/
+        vTaskDelayUntil(&xLastWakeTime, xPeriod);
+    }
 }
