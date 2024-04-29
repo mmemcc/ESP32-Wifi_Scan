@@ -5,12 +5,12 @@
 ## 매트랩 코드
 [https://drive.google.com/drive/folders/1zXymEdCSx9j-uesLY7W9gB2mRGxoH489?usp=sharing  ](https://drive.google.com/drive/folders/10aouw_EBh2GOeL8dMG2eUUXHceP9TmLP?usp=sharing)
 
-## 설명
+### 설명 (아래부터 몰라도 됨)
 부팅 후 시리얼 모니터에 'scan' 입력 시 wifi AP를 스캔함.  
 맨 처음에 나오는 숫자: scan 된 wifi ap 수  
 SSID    RSSI(dBm)    Channel    Band Width(MHz)  
 
-## Example
+### Example
 I (635) main_task: Returned from app_main()  
 scan> scan  
 47  
