@@ -1,11 +1,14 @@
-
 ## 사용법
-부팅 후 시리얼 모니터에 'scan' 입력 시 wifi AP를 스캔함.  
-맨 처음에 나오는 숫자: scan 된 wifi ap 수  
-SSID    RSSI(dBm)    Channel    Band Width(MHz)  
+해당 코드를 ESP32 모듈에 업로드 후 아래 매트랩 링크 폴더를 통째로 다운로드  
+해당 폴더 내에 매트랩 앱 사용 설명서 참고  
 
 ## 매트랩 코드
 [https://drive.google.com/drive/folders/1zXymEdCSx9j-uesLY7W9gB2mRGxoH489?usp=sharing  ](https://drive.google.com/drive/folders/10aouw_EBh2GOeL8dMG2eUUXHceP9TmLP?usp=sharing)
+
+## 설명
+부팅 후 시리얼 모니터에 'scan' 입력 시 wifi AP를 스캔함.  
+맨 처음에 나오는 숫자: scan 된 wifi ap 수  
+SSID    RSSI(dBm)    Channel    Band Width(MHz)  
 
 ## Example
 I (635) main_task: Returned from app_main()  
