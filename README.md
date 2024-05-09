@@ -3,7 +3,8 @@
 해당 폴더 내에 매트랩 앱 사용 설명서 참고  
 
 ## 매트랩 코드
-[https://drive.google.com/drive/folders/1zXymEdCSx9j-uesLY7W9gB2mRGxoH489?usp=sharing  ](https://drive.google.com/drive/folders/10aouw_EBh2GOeL8dMG2eUUXHceP9TmLP?usp=sharing)
+V1: [https://drive.google.com/drive/folders/1zXymEdCSx9j-uesLY7W9gB2mRGxoH489?usp=sharing  ](https://drive.google.com/drive/folders/10aouw_EBh2GOeL8dMG2eUUXHceP9TmLP?usp=sharing)  
+V2: https://drive.google.com/drive/folders/12BD8M4mJOrAFB87ioABmAVfyy1pw8_xL?usp=sharing  
 
 ### 설명 (아래부터 몰라도 됨)
 부팅 후 시리얼 모니터에 'scan' 입력 시 wifi AP를 스캔함.  
